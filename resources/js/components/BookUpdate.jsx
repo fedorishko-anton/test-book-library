@@ -32,8 +32,10 @@ export default function BookUpdate({bookId,onChange}){
 
         try {
             await axios.put(`api/books/${bookId}`, book);
+            alert('Book is updated')
             onChange()
         } catch (error) {
+            alert(error.response.data.message)
             console.error("Failed to update book:", error);
         }
     };
@@ -46,6 +48,7 @@ export default function BookUpdate({bookId,onChange}){
             setBook(null)
             onChange(true)
         } catch (error) {
+            alert(error.response.data.message)
             console.error("Failed to update book:", error);
         }
     };

@@ -13,6 +13,7 @@ export default function BookCreate({onChange}){
 
             e.target.reset()
         } catch (error) {
+            alert(error.response.data.message)
             console.error("Failed to fetch books:", error);
         }
     };
