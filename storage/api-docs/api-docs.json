@@ -1,0 +1,275 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Book API",
+        "description": "API documentation for Book Library",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000",
+            "description": "Local server"
+        }
+    ],
+    "paths": {
+        "/api/books": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Get all books (id and title only)",
+                "operationId": "a9d13283dfab262e97af3c914d51b7a8",
+                "responses": {
+                    "200": {
+                        "description": "List of books",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/BookShort"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Store a book",
+                "operationId": "47047e95a700b3271b697e57d0965191",
+                "requestBody": {
+                    "description": "Book data to create",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "New book title"
+                                    },
+                                    "author": {
+                                        "type": "string",
+                                        "example": "Charity Kutch I"
+                                    },
+                                    "genre": {
+                                        "type": "string",
+                                        "example": "dolores"
+                                    },
+                                    "publisher": {
+                                        "type": "string",
+                                        "example": "Langworth and Sons"
+                                    },
+                                    "publication_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "1973-06-29"
+                                    },
+                                    "price_usd": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 54.46
+                                    },
+                                    "word_count": {
+                                        "type": "integer",
+                                        "example": 44173
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Book created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Book"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/api/books/{id}": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Get book by id",
+                "operationId": "2fdd668eb661591758aff4c56ca9b66a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the book",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Book found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Book"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Book not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Update book by id",
+                "operationId": "f5ca658c501a803d68655af0365e3802",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the book",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Book updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Book"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Book not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Delete book by id",
+                "operationId": "1a9c26667c32b8ed5e5770d7a1cc9d5c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the book",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Book deleted successfully"
+                    },
+                    "404": {
+                        "description": "Book not found"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Book": {
+                "title": "Book",
+                "description": "Book model",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Alias esse a officiis. asd"
+                    },
+                    "author": {
+                        "type": "string",
+                        "example": "Charity Kutch I"
+                    },
+                    "genre": {
+                        "type": "string",
+                        "example": "dolores"
+                    },
+                    "publisher": {
+                        "type": "string",
+                        "example": "Langworth and Sons"
+                    },
+                    "publication_date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "1973-06-29"
+                    },
+                    "price_usd": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 54.46
+                    },
+                    "word_count": {
+                        "type": "integer",
+                        "example": 44173
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2026-03-30T12:00:00Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2026-03-30T12:00:00Z"
+                    }
+                },
+                "type": "object"
+            },
+            "BookShort": {
+                "title": "BookShort",
+                "description": "Simplified book model with id and title",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 8
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Corrupti et est doloremque."
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Books",
+            "description": "Books"
+        }
+    ]
+}
